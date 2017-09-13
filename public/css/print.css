@@ -1,0 +1,33 @@
+@media print {
+.borrar{
+    display: none;
+}
+
+.col-sm-2{
+    width: 16.66666667% !important; 
+}
+
+.col-sm-4{
+   width: 33.33333333% !important;
+}
+
+.mostrar-print{
+    display: block;
+}
+
+.mostrar-pc{
+    display: none;
+}
+.encabezado{
+    display:block;
+}
+
+nav{
+    display: none;
+}
+
+.navbar.navbar-default.navbar-fixed-bottom{
+    display: none;
+}
+
+}
