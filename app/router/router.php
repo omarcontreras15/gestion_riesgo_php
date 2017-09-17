@@ -32,7 +32,14 @@ class Router
                     case "proyectos":
                         $this->proyecto->cargarHtmlProyectos();
                         break;
-                    
+
+                    case "riesgos":
+                    if(isset($_GET['id'])){
+                        $this->proyecto->cargarRiesgosHtml($_GET['id']);
+                    }else{
+                        $this->proyecto->cargarHtmlProyectos();
+                    }
+                        break;
                     default:
                         header("Location:index.php");
                         break;
@@ -46,7 +53,36 @@ class Router
                     $this->user->login($_POST["username"], $_POST["password"]);
                     break;
 
+                case "registrar-proyecto":
+                    $this->proyecto->registrarProyecto($_POST["nombre-proyecto"], $_POST["gerente-proyecto"]);
+                    break;
+
+                case "obtener-cantidad-pag-tabla-proyecto":
+                    $this->proyecto->obtenerCantPag($_POST['busqueda']);
+                    break;
+                    
+                case "cargar-proyecto-pagina":
+                    $this->proyecto->cargarProyectosPagina($_POST['busqueda'],$_POST['pagina']);
+                    break;
+
+                case "borrar-proyecto":
+                    $this->proyecto->borrarProyecto($_POST['id_proyecto']);
+                    break;
+
+                case "registrar-riesgo":
+                    $this->proyecto->registrarRiesgo($_POST['id_proyecto'], $_POST['riesgo'],$_POST['causas'],$_POST['efectos'],$_POST['como_impacta'],$_POST['impacto'],$_POST['probabilidad']);
+                    break;
+
+                case "cargar-riesgos":
+                    $this->proyecto->cargarRiesgos($_POST['id_proyecto']);
+                    break;
                 default:
+
+                case "borrar-riesgo":
+                $this->proyecto->borrarRiesgo($_POST['id_proyecto'], $_POST['id_riesgo']);
+                break;
+
+            default:
                     header("Location:index.php");
                     break;
             }
