@@ -183,15 +183,15 @@
 								  <th>Rango PXI (probabilidad x impacto)</th>
 								</tr>
 								<tr>
-								  <td  bgcolor="green"><b>Riesgo bajo</b></td>
+								  <td><b><label class="btn btn-success">Riesgo bajo<input type="checkbox" checked="" class="badgebox" id="color-5cb85c"><span class="badge">✓</span></label></b></td>
 								  <td>(1-4)</td>
 								</tr>
 								<tr>
-								  <td bgcolor="yellow" ><b>Riesgo moderado</b></td>
+								  <td><b><label class="btn btn-warning">Riesgo moderado<input type="checkbox" checked="" class="badgebox" id="color-f0ad4e"><span class="badge">✓</span></label></b></td>
 								  <td>(5-11)</td>
 								</tr>
 								<tr>
-								  <td bgcolor="red"><b>Riesgo alto</b></td>
+								  <td><b><label class="btn btn-danger">Riesgo alto<input type="checkbox" checked="" class="badgebox" id="color-d9534f"><span class="badge">✓</span></label></b></td>
 								  <td>(12-25)</td>
 								</tr>
 							  </table>
@@ -222,6 +222,21 @@
 				//llama a la funcion ajax
 				registrarRiesgos(datos, url);
 			});
+
+
+			$(".badgebox").click(function (){
+                    var seleccionado=$(this).prop('checked');
+                    var id=$(this).attr("id");         
+                     if(seleccionado){
+                        $(".text-center."+id).each(function () {
+							$(this).show();
+							});
+                        }else{
+							$(".text-center."+id).each(function () {
+							$(this).hide();
+							});
+                        }
+            });
 
 		}
 
@@ -297,15 +312,15 @@
 		array.forEach(function (element) {
 			var color = "";
 			if (element["total"] <= 4) {
-				color = "green";
+				color = "5cb85c";
 			} else if (element["total"] >= 5 && element["total"] <= 11) {
-				color = "yellow";
+				color = "f0ad4e";
 			} else {
-				color = "red";
+				color = "d9534f";
 			}
 
 			cont++;
-			html += "<tr><td  class='text-center'>R" + cont + "</td><td>" + element["riesgo"] + "</td><td class='text-center'>" + element["probabilidad"] + "</td><td class='text-center'>" + element["impacto"] + "</td><td class='text-center' bgcolor='" + color + "'><b>" + element["total"] + "</b></td></tr>";
+			html += "<tr class='text-center color-"+color+"'><td  class='text-center'>R" + cont + "</td><td>" + element["riesgo"] + "</td><td class='text-center'>" + element["probabilidad"] + "</td><td class='text-center'>" + element["impacto"] + "</td><td class='text-center' bgcolor='#" + color + "'><b>" + element["total"] + "</b></td></tr>";
 		}, this);
 
 		$("#datos-tabla-riesgos").html(html);
