@@ -82,6 +82,10 @@ class Router
                 $this->proyecto->borrarRiesgo($_POST['id_proyecto'], $_POST['id_riesgo']);
                 break;
 
+                case "registrar-respuesta-riesgo":
+                $this->proyecto->registrarRespuestaRiesgo($_POST['id_proyecto'], $_POST['id_riesgo'],$_POST['acciones'],$_POST['responsable'],$_POST['cronograma'],$_POST['indicador']);
+                break;
+
             default:
                     header("Location:index.php");
                     break;

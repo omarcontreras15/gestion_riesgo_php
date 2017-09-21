@@ -67,12 +67,18 @@ class Proyecto extends Controller {
         $array=$this->proyectoModel->cargarRiesgos($id_proyecto);
         echo json_encode($array);
     }
-    
+   
 
     public function borrarRiesgo($id_proyecto, $id_riesgo){
         $rel=$this->proyectoModel->borrarRiesgo($id_proyecto,$id_riesgo);
         echo $rel;
     }
+
+    public function registrarRespuestaRiesgo($id_proyecto, $id_riesgo,$acciones,$responsable,$cronograma,$indicador){
+        $rel=$this->proyectoModel->registrarRespuestaRiesgo($id_proyecto, $id_riesgo,$acciones,$responsable,$cronograma,$indicador);
+        echo $rel;
+    }
+
 
 }
 

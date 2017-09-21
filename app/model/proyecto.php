@@ -54,10 +54,22 @@ class ProyectoModel extends Model {
    public function cargarRiesgos($id_proyecto){
     $array= array();
     $this->connect();
-    $consulta="SELECT id_proyecto,riesgo,causas,efectos,como_impacta,impacto,probabilidad,(impacto*probabilidad) total from riesgo where id_proyecto=$id_proyecto";  
+    $consulta="SELECT id_proyecto, id_riesgo, riesgo,causas,efectos,como_impacta,impacto,probabilidad,(impacto*probabilidad) total, acciones, responsable, cronograma, indicador from riesgo where id_proyecto=$id_proyecto";  
     $consulta=$this->query($consulta);
      while($row = mysqli_fetch_array($consulta)){
         array_push($array, $row);
+    }
+    $this->terminate();
+    return $array;
+}
+
+public function cargarRiesgoID($id_proyecto, $id_riesgo){
+    $array= null;
+    $this->connect();
+    $consulta="SELECT id_proyecto, id_riesgo, riesgo,causas,efectos,como_impacta,impacto,probabilidad,(impacto*probabilidad) total, acciones, responsable, cronograma, indicador from riesgo where id_proyecto=$id_proyecto and id_riesgo=$id_riesgo";  
+    $consulta=$this->query($consulta);
+     while($row = mysqli_fetch_array($consulta)){
+       $array=$row;
     }
     $this->terminate();
     return $array;
@@ -79,6 +91,15 @@ class ProyectoModel extends Model {
     $this->connect();
     $delete = "delete from riesgo where id_proyecto=$id_proyecto and id_riesgo=$id_riesgo";
     $query = $this->query($delete);
+    $this->terminate();
+    return $query;
+}
+
+public function registrarRespuestaRiesgo($id_proyecto, $id_riesgo,$acciones,$responsable,$cronograma,$indicador){
+    $this->connect();
+    $acciones=nl2br($acciones);
+    $update = "UPDATE  riesgo set acciones='$acciones', responsable='$responsable', cronograma='$cronograma', indicador='$indicador' where id_proyecto=$id_proyecto and id_riesgo=$id_riesgo";
+    $query = $this->query($update);
     $this->terminate();
     return $query;
 }
