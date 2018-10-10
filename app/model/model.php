@@ -7,8 +7,8 @@ class Model {
         $server="localhost";
         $user="root";
         $pass="";
-        $bd="gestion_riesgo";
-        $this->connection = mysqli_connect($server,$user,$pass,$bd) or  die(("Error " . mysqli_error($this->connection)));
+        $database="gestion_riesgo";
+        $this->connection = mysqli_connect($server,$user,$pass,$database) or  die(("Error " . mysqli_error($this->connection)));
     }
 
     public function query($sql){

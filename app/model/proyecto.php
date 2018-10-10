@@ -104,6 +104,16 @@ public function registrarRespuestaRiesgo($id_proyecto, $id_riesgo,$acciones,$res
     return $query;
 }
 
+
+
+public function borrarTodos($id_proyecto){
+    $this->connect();
+    $delete = "delete from riesgo where id_proyecto=$id_proyecto";
+    $query = $this->query($delete);
+    $this->terminate();
+    return $query;
+}
+
 }
 
 ?>
